@@ -2,7 +2,7 @@
 
 Dead simple to-do app. Pretty generic, but it's simple.
 
-# Why?
+## Why?
 
 I needed something to keep track of my tasks, and I didn't want something bloated that would make me create an account and had so many buttons and UI elements everywhere.
 
