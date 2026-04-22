@@ -25,11 +25,12 @@ export default function App() {
   
   const [todos, setTodos] = useState<TodoItem[]>(() => {
     try {
-      return JSON.parse(localStorage.getItem("todos"))
+      return JSON.parse(localStorage.getItem("todos")) || []
     } catch (err) {
       console.log(err)
-      return []
     }
+    
+    return []
   })
 
   const [settingsOpen, setSettingsOpen] = useState(false)
