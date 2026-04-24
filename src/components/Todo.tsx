@@ -27,7 +27,7 @@ export default function Todo({ label, done, onMarked, onDelete }: {
       </div>
 
       <button className="group-hover:opacity-100 duration-200 opacity-50 cursor-pointer" onClick={onDelete}>
-        <Trash2 size={18} className="text-red-400" />
+        <Trash2 size={18} className="text-red-500" />
       </button>
     </div>
   )
