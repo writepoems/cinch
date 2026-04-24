@@ -18,7 +18,7 @@ export default function Todo({ label, done, onMarked, onDelete }: {
     <div className="group hover:bg-neutral-200/75 duration-200 p-1.5 rounded-xl flex items-center justify-between">
       <div className="flex items-center gap-2">
         <button onClick={onMarked}>
-          <TodoCheck done />
+          <TodoCheck done={done} />
         </button>
 
         {done ? <s>{label}</s> : <p>{label}</p>}

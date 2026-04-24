@@ -33,7 +33,7 @@ html, body {
   }
 
   .todo-check {
-    @apply cursor-pointer p-0.5 rounded-full border-2 border-neutral-900 duration-200;
+    @apply cursor-pointer p-0.5 rounded-full border-2 bg-transparent border-neutral-900 duration-200;
   }
 
   .todo-check-done {
