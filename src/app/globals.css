@@ -31,4 +31,12 @@ html, body {
   .btn {
     @apply px-3 py-2 font-semibold flex items-center gap-2 cursor-pointer;
   }
+
+  .todo-check {
+    @apply cursor-pointer p-0.5 rounded-full border-2 border-neutral-900 duration-200;
+  }
+
+  .todo-check-done {
+    @apply cursor-pointer p-0.5 rounded-full border-2 border-neutral-900 bg-neutral-900 duration-200;
+  }
 }
