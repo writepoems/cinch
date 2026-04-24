@@ -7,26 +7,19 @@ import CreateForm from "@components/CreateForm"
 import NavigationBar from "@components/NavigationBar"
 import SettingsModal from "@components/SettingsModal"
 
-import type { Alert, TodoItem } from "../types"
+import { TodoStore } from "@lib/todo-store"
+import type { Alert, TodoItem } from "@lib/types"
 
 export default function App() {
+  const store = new TodoStore()
+
   const [alert, setAlert] = useState<Alert|null>()
   const [draft, setDraft] = useState<string>("")
-  
-  const [todos, setTodos] = useState<TodoItem[]>(() => {
-    try {
-      return JSON.parse(localStorage.getItem("todos") || "[]")
-    } catch (err) {
-      console.log(err)
-    }
-    
-    return []
-  })
-
   const [settingsOpen, setSettingsOpen] = useState(false)
+  
+  const [todos, setTodos] = useState<TodoItem[]>(() => store.getTodos())
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos))
     const amount = todos.filter(t => !t.done).length
     document.title = amount > 0 ? `(${amount}) cinch` : "cinch"
   }, [todos])
@@ -54,7 +47,8 @@ export default function App() {
                 type: "error", message: "Content must not be empty" 
               })
               
-              setTodos([{ done: false, label: draft }, ...todos])
+              store.addTodo(draft)
+              setTodos(() => store.getTodos())
               setAlert(undefined)
               setDraft("")
             }}
@@ -69,22 +63,17 @@ export default function App() {
           </small>
 
           <ul className="flex flex-col gap-2 my-2">
-            {todos.map((todo, index) => (
+            {todos.map(todo => (
               <Todo 
                 {...todo}
-                key={index} 
+                key={todo.id} 
                 onDelete={() => {
-                  const toUpdate = todos
-                  toUpdate.splice(index, 1)
-                  setTodos([...toUpdate])
+                  store.deleteTodo(todo.id)
+                  setTodos(store.getTodos())
                 }}
                 onMarked={() => {
-                  const snapshotTodo = todo
-                  snapshotTodo.done = !todo.done
-  
-                  const toUpdate = todos
-                  toUpdate.splice(index, 1, snapshotTodo)
-                  setTodos([...toUpdate])
+                  store.markTodo(todo.id)
+                  setTodos(store.getTodos())
                 }}
               />
             ))}
