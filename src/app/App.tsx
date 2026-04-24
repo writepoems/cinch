@@ -7,10 +7,10 @@ import CreateForm from "@components/CreateForm"
 import NavigationBar from "@components/NavigationBar"
 import SettingsModal from "@components/SettingsModal"
 
-import type { AddError, TodoItem } from "../types"
+import type { Alert, TodoItem } from "../types"
 
 export default function App() {
-  const [error, setError] = useState<AddError|null>()
+  const [alert, setAlert] = useState<Alert|null>()
   const [draft, setDraft] = useState<string>("")
   
   const [todos, setTodos] = useState<TodoItem[]>(() => {
@@ -38,10 +38,10 @@ export default function App() {
 
       <main className="p-4 flex justify-center">
         <article className="max-w-1/3">
-          {error &&
+          {alert?.type === "error" &&
             <Error 
-              message={error.message} 
-              onDismiss={() => setError(null)}
+              message={alert.message} 
+              onDismiss={() => setAlert(null)}
             />
           }
 
@@ -50,10 +50,12 @@ export default function App() {
             onDraftUpdated={(e) => setDraft(e.target.value)}
             onSubmit={(e) => {
               e.preventDefault()
-              if (!draft) return void setError({ message: "Content must not be empty" })
+              if (!draft) return void setAlert({ 
+                type: "error", message: "Content must not be empty" 
+              })
               
               setTodos([{ done: false, label: draft }, ...todos])
-              setError(undefined)
+              setAlert(undefined)
               setDraft("")
             }}
           />

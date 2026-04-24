@@ -3,6 +3,7 @@ export interface TodoItem {
   label: string
 }
 
-export interface AddError {
+export interface Alert {
+  type: "success" | "error"
   message: string
 }
