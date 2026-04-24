@@ -1,9 +1,11 @@
 import { Check, Trash2 } from "lucide-react"
 
 function TodoCheck({ done }: { done: boolean }) {
+  // hopefully literally nobody notices the color difference
+  
   return (
-    <div className={done ? "todo-check-done" : "todo-check"}>
-      <Check size={12} strokeWidth={4} className="text-white" />
+    <div className={done ? "todo-check-done" : "todo-check bg-transparent text-transparent"}>
+      <Check size={12} strokeWidth={4} className={done ? "text-neutral-200" : "text-transparent"} />
     </div>
   )
 }
