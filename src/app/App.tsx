@@ -32,7 +32,7 @@ export default function App() {
       <NavigationBar onSettingsOpen={() => setSettingsOpen(true)} />
 
       <main className="p-4 flex justify-center">
-        <article className="lg:max-w-1/3">
+        <article className="xl:w-1/5">
           {alert?.type === "error" &&
             <Error 
               message={alert.message} 
