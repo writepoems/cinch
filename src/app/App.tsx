@@ -82,7 +82,7 @@ export default function App() {
           </ul>
 
           {todos.length === 0 && 
-            <p className="text-center opacity-50 mt-2">
+            <p className="text-center opacity-75 mt-2">
               Nothing here yet! Try adding a to-do.
             </p>
           }
