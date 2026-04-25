@@ -8,11 +8,11 @@ export default function NavigationBar({ onSettingsOpen }: {
       <h1 className="font-display font-semibold text-5xl">cinch</h1>
 
       <div className="flex items-center gap-2">
-        <a target="__window" href="https://github.com/writepoems/cinch" className="group p-2 cursor-pointer rounded-xl">
+        <a title="Source Code" target="__window" href="https://github.com/writepoems/cinch" className="group p-2 cursor-pointer rounded-xl">
           <CodeXml className="group-hover:animate-pulse" />
         </a>
 
-        <button className="group p-2 cursor-pointer rounded-xl" onClick={onSettingsOpen}>
+        <button title="Settings" name="Settings" className="group p-2 cursor-pointer rounded-xl" onClick={onSettingsOpen}>
           <Settings className="group-hover:rotate-180 duration-500" />
         </button>
       </div>
