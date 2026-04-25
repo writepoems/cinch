@@ -6,7 +6,7 @@ export default function SettingsModal({ open, close }: {
 }) {
   return (
     <div id="dialog-container" className={open ? "" : "hidden"}>
-      <dialog open className="z-100 h-2/3 w-1/3 relative border border-neutral-300 bg-neutral-50 shadow-lg rounded-xl p-4">
+      <dialog open className="z-100 h-3/5 w-4/5 lg:h-2/3 lg:w-1/3 relative border border-neutral-300 bg-neutral-50 shadow-lg rounded-xl p-4">
         <div className="flex items-center justify-between mb-2">
           <h3 className="font-bold font-display text-4xl">settings</h3>
 
