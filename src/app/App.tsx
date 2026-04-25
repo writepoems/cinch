@@ -10,6 +10,8 @@ import SettingsModal from "@components/SettingsModal"
 import { TodoStore } from "@lib/todo-store"
 import type { Alert, TodoItem } from "@lib/types"
 
+import "./app.css"
+
 export default function App() {
   const store = new TodoStore()
 
