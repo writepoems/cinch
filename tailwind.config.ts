@@ -6,7 +6,6 @@ export default {
     extend: {
       fontFamily: {
         display: ["Euphoria Script", ...twDefault.fontFamily.sans],
-        sans: ["Inter", ...twDefault.fontFamily.sans]
       },
 
       animation: {
