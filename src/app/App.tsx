@@ -44,11 +44,11 @@ export default function App() {
             onDraftUpdated={(e) => setDraft(e.target.value)}
             onSubmit={(e) => {
               e.preventDefault()
-              if (!draft) return void setAlert({ 
+              if (!draft.trim()) return void setAlert({ 
                 type: "error", message: "Content must not be empty" 
               })
               
-              store.addTodo(draft)
+              store.addTodo(draft.trim())
               setAlert(undefined)
               setDraft("")
             }}
