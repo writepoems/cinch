@@ -13,13 +13,12 @@ import type { Alert, TodoItem } from "@lib/types"
 import "./app.css"
 
 export default function App() {
-  const store = new TodoStore()
-
   const [alert, setAlert] = useState<Alert|null>()
   const [draft, setDraft] = useState<string>("")
   const [settingsOpen, setSettingsOpen] = useState(false)
   
-  const [todos, setTodos] = useState<TodoItem[]>(() => store.getTodos())
+  const [todos, setTodos] = useState<TodoItem[]>([{ label: "Failed to load", done: false, id: -1 }])
+  const store = new TodoStore(setTodos)
 
   useEffect(() => {
     const amount = todos.filter(t => !t.done).length
@@ -50,7 +49,6 @@ export default function App() {
               })
               
               store.addTodo(draft)
-              setTodos(() => store.getTodos())
               setAlert(undefined)
               setDraft("")
             }}
@@ -69,14 +67,8 @@ export default function App() {
               <Todo 
                 {...todo}
                 key={todo.id} 
-                onDelete={() => {
-                  store.deleteTodo(todo.id)
-                  setTodos(store.getTodos())
-                }}
-                onMarked={() => {
-                  store.markTodo(todo.id)
-                  setTodos(store.getTodos())
-                }}
+                onDelete={() => store.deleteTodo(todo.id)}
+                onMarked={() => store.markTodo(todo.id)}
               />
             ))}
           </ul>

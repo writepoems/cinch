@@ -1,12 +1,17 @@
+import type { Dispatch, SetStateAction } from "react"
 import type { TodoItem } from "./types"
 
 export class TodoStore {
   private local: Storage
   private todos: TodoItem[]
+  private update: Dispatch<SetStateAction<TodoItem[]>>
 
-  constructor() {
+  constructor(updateCallback: Dispatch<SetStateAction<TodoItem[]>>) {
     this.local = localStorage
     this.todos = this.getTodos()
+    this.update = updateCallback
+
+    this.update(this.todos)
     console.log("Initialized todo store")
   }
 
@@ -20,6 +25,7 @@ export class TodoStore {
   private save() {
     this.local.setItem("todos", JSON.stringify(this.todos))
     this.todos = this.getTodos()
+    this.update(this.todos)
   }
 
   getTodo(id: number) {
