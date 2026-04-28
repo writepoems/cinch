@@ -14,6 +14,7 @@ export default function CreateForm({ draft, onSubmit, onDraftUpdated }: {
         name="draft"
         className="outline-none rounded-xl w-full border border-neutral-300 p-2" 
         placeholder="Wash the dishes..." 
+        autoComplete="off"
       />
 
       <button 
