@@ -28,7 +28,7 @@ export default function Todo({ label, done, onMarked, onDelete }: {
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1, transition: { duration: 0.025 } }}
       exit={{ scale: 0, opacity: 0, x: 1000, transition: { duration: 0.25 } }}
-      onClick={deleted ? null : onMarked} 
+      onClick={deleted ? () => null : onMarked} 
       className="group cursor-pointer hover:bg-neutral-200/75 duration-200 p-1.5 rounded-xl flex items-center justify-between"
     >
       <div className="flex items-center gap-2">
