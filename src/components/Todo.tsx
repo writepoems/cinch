@@ -1,4 +1,7 @@
 import { Check, Trash2 } from "lucide-react"
+import { AnimatePresence, motion } from "motion/react"
+
+import { useState } from "react"
 
 function TodoCheck({ done }: { done: boolean }) {
   // hopefully literally nobody notices the color difference
@@ -16,12 +19,22 @@ export default function Todo({ label, done, onMarked, onDelete }: {
   onMarked: () => void
   onDelete: () => void
 }) {
+  // This state variable is used to ensure spamming after deleting doesn't cause an error
+  // DO NOT REMOVE!!!
+  const [deleted, setDeleted] = useState(false)
+
   return (
-    <div onClick={onMarked} className="group cursor-pointer hover:bg-neutral-200/75 duration-200 p-1.5 rounded-xl flex items-center justify-between">
+    <motion.div 
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1, transition: { duration: 0.025 } }}
+      exit={{ scale: 0, opacity: 0, x: 1000, transition: { duration: 0.25 } }}
+      onClick={deleted ? null : onMarked} 
+      className="group cursor-pointer hover:bg-neutral-200/75 duration-200 p-1.5 rounded-xl flex items-center justify-between"
+    >
       <div className="flex items-center gap-2">
         <button onClick={(e) => {
           e.stopPropagation()
-          onMarked()
+          if (!deleted) onMarked()
         }}>
           <TodoCheck done={done} />
         </button>
@@ -29,15 +42,21 @@ export default function Todo({ label, done, onMarked, onDelete }: {
         {done ? <s>{label}</s> : <p>{label}</p>}
       </div>
 
-      <button 
-        className="group-hover:opacity-100 duration-200 opacity-50 cursor-pointer" 
-        onClick={(e) => {
-          e.stopPropagation()
-          onDelete()
-        }}
-      >
-        <Trash2 size={18} className="text-red-500" />
-      </button>
-    </div>
+      <AnimatePresence>
+        {!deleted &&
+          <button 
+            disabled={deleted}
+            className="group-hover:opacity-100 duration-200 opacity-50 cursor-pointer" 
+            onClick={(e) => {
+              e.stopPropagation()
+              setDeleted(true)
+              onDelete()
+            }}
+          >
+            <Trash2 size={18} className="text-red-500" />
+          </button>
+        }
+      </AnimatePresence>
+    </motion.div>
   )
 }

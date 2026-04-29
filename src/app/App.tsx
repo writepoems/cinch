@@ -10,6 +10,7 @@ import SettingsModal from "@components/SettingsModal"
 import { TodoStore } from "@lib/todo-store"
 import type { Alert, TodoItem } from "@lib/types"
 
+import { AnimatePresence, motion } from "motion/react"
 import "./app.css"
 
 export default function App() {
@@ -32,12 +33,14 @@ export default function App() {
 
       <main className="p-4 flex justify-center">
         <article className="xl:w-2/6">
-          {alert?.type === "error" &&
-            <Error 
-              message={alert.message} 
-              onDismiss={() => setAlert(null)}
-            />
-          }
+          <AnimatePresence>
+            {alert?.type === "error" &&
+              <Error 
+                message={alert.message} 
+                onDismiss={() => setAlert(null)}
+              />
+            }
+          </AnimatePresence>
 
           <CreateForm
             draft={draft}
@@ -63,6 +66,7 @@ export default function App() {
           </small>
 
           <ul className="flex flex-col gap-2 my-2">
+            <AnimatePresence>
             {todos.map(todo => (
               <Todo 
                 {...todo}
@@ -71,12 +75,17 @@ export default function App() {
                 onMarked={() => store.markTodo(todo.id)}
               />
             ))}
+            </AnimatePresence>
           </ul>
 
           {todos.length === 0 && 
-            <p className="text-center opacity-75 mt-2">
+            <motion.p 
+              initial={{ opacity: 0, transition: { duration: 0.25 } }} 
+              animate={{ opacity: 1, transition: { duration: 0.25 } }} 
+              className="text-center opacity-75 mt-2"
+            >
               Nothing here yet! Try adding a to-do.
-            </p>
+            </motion.p>
           }
         </article>
       </main>

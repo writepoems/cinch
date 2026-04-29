@@ -1,4 +1,5 @@
 import { Plus } from "lucide-react"
+import { motion } from "motion/react"
 
 export default function CreateForm({ draft, onSubmit, onDraftUpdated }: {
   draft: string
@@ -17,13 +18,15 @@ export default function CreateForm({ draft, onSubmit, onDraftUpdated }: {
         autoComplete="off"
       />
 
-      <button 
+      <motion.button 
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.9 }}
         className="flex gap-2 items-center border border-neutral-800 bg-neutral-800 text-neutral-100 btn rounded-xl"
         type="submit"
       >
         <Plus size={18} />
         Add
-      </button>
+      </motion.button>
     </form>
   )
 }
