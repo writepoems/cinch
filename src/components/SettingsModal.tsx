@@ -1,11 +1,11 @@
-import { Trash2, X } from "lucide-react";
+import { Trash2, X } from "lucide-react"
+import { createPortal } from "react-dom"
 
-export default function SettingsModal({ open, close }: {
-  open: boolean
+function SettingsModalContent({ close }: {
   close: () => void
 }) {
   return (
-    <div id="dialog-container" className={open ? "" : "hidden"}>
+    <div id="dialog-container">
       <dialog open className="z-100 h-3/5 w-4/5 lg:h-2/3 lg:w-1/3 relative border border-neutral-300 bg-neutral-50 shadow-lg rounded-xl p-4">
         <div className="flex items-center justify-between mb-2">
           <h3 className="font-bold font-display text-4xl">settings</h3>
@@ -24,5 +24,15 @@ export default function SettingsModal({ open, close }: {
         </button>
       </dialog>
     </div>
+  )
+}
+
+export default function SettingsModal({ open, close }: {
+  open: boolean
+  close: () => void
+}) {
+  return createPortal(
+    open && <SettingsModalContent close={close} />,
+    document.body
   )
 }
