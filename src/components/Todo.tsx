@@ -5,10 +5,19 @@ import { useState } from "react"
 
 function TodoCheck({ done }: { done: boolean }) {
   // hopefully literally nobody notices the color difference
+  // really hacky solution for the animation itself, should be reworked asap
   
   return (
     <div className={done ? "todo-check-done" : "todo-check bg-transparent text-transparent"}>
-      <Check size={12} strokeWidth={4} className={done ? "text-neutral-200" : "text-transparent"} />
+      {done ? 
+        <motion.div
+          initial={{ scale: 0, rotate: 0 }}
+          animate={{ scale: 1, rotate: 360, transition: { duration: 0.25 } }}
+        >
+          <Check size={12} strokeWidth={4} className="text-neutral-200" />
+        </motion.div>
+
+      : <Check size={12} strokeWidth={4} className="text-transparent" />}
     </div>
   )
 }
