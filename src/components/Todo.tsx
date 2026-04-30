@@ -22,9 +22,10 @@ function TodoCheck({ done }: { done: boolean }) {
   )
 }
 
-export default function Todo({ label, done, onMarked, onDelete }: {
+export default function Todo({ label, done, id, onMarked, onDelete }: {
   label: string
   done: boolean
+  id: number
   onMarked: () => void
   onDelete: () => void
 }) {
@@ -33,7 +34,7 @@ export default function Todo({ label, done, onMarked, onDelete }: {
   const [deleted, setDeleted] = useState(false)
 
   return (
-    <motion.div 
+    <motion.li 
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1, transition: { duration: 0.025 } }}
       exit={{ scale: 0, opacity: 0, x: 1000, transition: { duration: 0.25 } }}
@@ -41,7 +42,7 @@ export default function Todo({ label, done, onMarked, onDelete }: {
       className="group cursor-pointer hover:bg-neutral-200/75 duration-200 p-1.5 rounded-xl flex items-center justify-between"
     >
       <div className="flex items-center gap-2">
-        <button onClick={(e) => {
+        <button aria-label={`mark-todo-${id}`} onClick={(e) => {
           e.stopPropagation()
           if (!deleted) onMarked()
         }}>
@@ -54,6 +55,7 @@ export default function Todo({ label, done, onMarked, onDelete }: {
       <AnimatePresence>
         {!deleted &&
           <button 
+            aria-label={`delete-todo-${id}`}
             disabled={deleted}
             className="group-hover:opacity-100 duration-200 opacity-50 cursor-pointer" 
             onClick={(e) => {
@@ -66,6 +68,6 @@ export default function Todo({ label, done, onMarked, onDelete }: {
           </button>
         }
       </AnimatePresence>
-    </motion.div>
+    </motion.li>
   )
 }

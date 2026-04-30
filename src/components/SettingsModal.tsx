@@ -39,7 +39,7 @@ function SettingsModalContent({ close }: {
         <div className="flex items-center justify-between mb-2">
           <h3 className="font-bold font-display text-4xl">settings</h3>
 
-          <button className="cursor-pointer absolute top-3.5 right-3.5" onClick={close}>
+          <button aria-label="Close Settings" className="cursor-pointer absolute top-3.5 right-3.5" onClick={close}>
             <X />
           </button>
         </div>

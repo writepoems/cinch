@@ -26,7 +26,7 @@ export default function NavigationBar({ onSettingsOpen }: {
 
         <motion.button 
           title="Settings" 
-          name="Settings" 
+          aria-label="Settings" 
           className="group p-2 cursor-pointer rounded-xl" 
           onClick={onSettingsOpen}
           whileHover={{
