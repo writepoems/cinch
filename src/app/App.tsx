@@ -36,7 +36,7 @@ export default function App() {
           <AnimatePresence>
             {alert?.type === "error" &&
               <Error 
-                message={alert.message} 
+                {...alert}
                 onDismiss={() => setAlert(null)}
               />
             }
@@ -48,7 +48,7 @@ export default function App() {
             onSubmit={(e) => {
               e.preventDefault()
               if (!draft.trim()) return void setAlert({ 
-                type: "error", message: "Content must not be empty" 
+                type: "error", title: "Unable to add item", message: "Content must not be empty" 
               })
               
               store.addTodo(draft.trim())
