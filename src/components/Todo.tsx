@@ -38,6 +38,7 @@ export default function Todo({ label, done, id, onMarked, onDelete }: {
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1, transition: { duration: 0.025 } }}
       exit={{ scale: 0, opacity: 0, x: 1000, transition: { duration: 0.25 } }}
+      whileTap={{ scale: 0.95 }}
       onClick={deleted ? () => null : onMarked} 
       className="group cursor-pointer hover:bg-neutral-200/75 duration-200 p-1.5 rounded-xl flex items-center justify-between"
     >
