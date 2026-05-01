@@ -6,7 +6,7 @@ export default function NavigationBar({ onSettingsOpen }: {
 }) {
   return (
     <nav className="z-50 top-0 sticky py-3 px-6 bg-neutral-50 border-neutral-300 border-b flex items-center justify-between">
-      <h1 className="font-display font-semibold text-5xl">cinch</h1>
+      <h1 className="font-display font-semibold text-5xl select-none">cinch</h1>
 
       <div className="flex items-center gap-2">
         <motion.a 
