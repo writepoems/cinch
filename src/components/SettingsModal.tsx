@@ -35,6 +35,9 @@ function SettingsModalContent({ close }: {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       id="dialog-container"
+      onClick={(event) => {
+        if (event.target === event.currentTarget) close()
+      }}
     >
       <motion.dialog 
         open 
